@@ -1,0 +1,108 @@
+@extends('backend.layouts.layout')
+
+@section('content')
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4>Kataloqlar</h4>
+                <div class="buttons">
+                    <a href="{{ route('admin.catalogs.index') }}" class="btn btn-success">Geriyə qayıt</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="{{route('admin.catalogs.update', $item->id)}}" method="POST" id="saveForm" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <ul class="nav nav-tabs" id="languageTabs" role="tablist">
+                    @foreach($languages as $language)
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link @if($loop->first) active @endif"
+                            id="{{$language->code}}-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#{{$language->code}}"
+                            type="button" role="tab"
+                            aria-controls="{{$language->code}}"
+                            aria-selected="true">
+                            {{$language->title}}
+                        </button>
+                    </li>
+                    @endforeach
+                </ul>
+
+                <div class="tab-content mt-3" id="languageTabsContent">
+                    @foreach($languages as $language)
+                    <div class="tab-pane fade show @if($loop->first) active @endif"
+                        id="{{$language->code}}" role="tabpanel"
+                        aria-labelledby="{{$language->code}}-tab">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="title_{{$language->code}}" class="form-label">Ad ({{$language->code}})</label>
+                                    <input type="text" class="form-control"
+                                        name="title[{{$language->code}}]"
+                                        id="title_{{$language->code}}"
+                                        placeholder="Ad daxil edin" value="{{$item->getTranslation('title', $language->code)}}">
+                                </div>
+                            </div>
+
+                           
+                           
+                        </div>
+
+                       
+                    </div>
+                    @endforeach
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="">Şəkil</label>
+                            <input type="file" name="image" class="form-control">
+                            @if($item->image)
+                                <img width="200" src="/storage/{{$item->image}}" alt="{{$item->title}}" class="mt-2">
+                            @endif
+                            <small class="text-muted d-block my-2">Tövsiyə olunan ölçü: 280x270 piksel</small>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="">Fayl (PDF, DOC)</label>
+                            <input type="file" name="file" class="form-control">
+                            @if($item->file)
+                                <a href="/storage/{{$item->file}}" target="_blank" class="btn btn-sm btn-info mt-2">
+                                    <i class="fas fa-download"></i> Faylı Yüklə
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="">Tarix</label>
+                            <input type="date" name="date" class="form-control" value="{{$item->date->format('Y-m-d')}}" required>
+                        </div>
+                    </div>
+                </div>
+
+               
+
+                <div class="row mt-2">
+                    <div class="d-flex justify-content-end">
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-success">
+                                <i class="fas fa-save"></i>
+                                <span>Yadda saxla</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
