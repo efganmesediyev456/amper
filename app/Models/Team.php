@@ -13,7 +13,7 @@ class Team extends BaseModel
         'created_at'=>'datetime:Y-m-d H:i:s'
     ];
 
-    public $translatedAttributes = ['title','position',''];
+    public $translatedAttributes = ['title','position'];
 
     
     protected static function booted()

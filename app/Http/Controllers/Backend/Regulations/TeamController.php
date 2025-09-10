@@ -43,7 +43,7 @@ class TeamController extends Controller
             DB::beginTransaction();
             $data = $request->except('_token','_method');
             if ($request->hasFile('image')) {
-                $data['image'] = FileUploadHelper::uploadFile($request->file('image'), "teams", 'teams');
+                $data['image'] = FileUploadHelper::uploadFile($request->file('image'), "teams", 'teams'.uniqid());
             }
             $item = $this->mainService->save($item, $data);
             $this->mainService->createTranslations($item,$request);
@@ -68,7 +68,7 @@ class TeamController extends Controller
             DB::beginTransaction();
             $data = $request->except('_token','_method');
             if ($request->hasFile('image')) {
-                $data['image'] = FileUploadHelper::uploadFile($request->file('image'), "teams", 'teams');
+                $data['image'] = FileUploadHelper::uploadFile($request->file('image'), "teams", 'teams_'.uniqid());
             }
             $item = $this->mainService->save($item, $data);
             $this->mainService->createTranslations($item,$request);

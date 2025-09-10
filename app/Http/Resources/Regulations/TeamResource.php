@@ -20,6 +20,7 @@ class TeamResource extends JsonResource
             'name' => $this->title,
             'position' => $this->position,
             'phone' => $this->phone,
+            'mail' => $this->email,
             'image' => url('/storage/'.$this->image),
         ];
     }

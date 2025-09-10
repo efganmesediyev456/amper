@@ -40,6 +40,8 @@
     <link href="{{ asset('backend/datatable/rowReorder.bootstrap5.css') }}">
     <link href="{{ asset('backend/datatable/scroller.bootstrap5.css') }}" >
     
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.3/css/jquery.dataTables.min.css">
+
 
 
    

@@ -19,16 +19,23 @@ class GeneralController extends Controller
     //     return response()->json(['message' => 'Sıralama uğurla yeniləndi!']);
     // }
 
+  
     public function updateOrder(Request $request)
     {
-        $model = $request->model;
-        $model = app($model);
+        
+        $model = app($request->model);
+
         foreach ($request->items as $order) {
-            $model::where('id', $order['id'])->update(['order' => $order['newPosition']]);
+            $model::where('id', $order['id'])->update([
+                'order' => $order['position']
+            ]);
         }
 
-        return response()->json(['message' => 'Sıralama uğurla yeniləndi!']);
+        return response()->json([
+            'message' => 'Sıralama uğurla yeniləndi!'
+        ]);
     }
+
 
 
     public function updateStatus(Request $request)

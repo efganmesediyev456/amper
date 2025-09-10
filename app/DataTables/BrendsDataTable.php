@@ -67,7 +67,7 @@ class BrendsDataTable extends DataTable
      */
     public function query(Brend $model): QueryBuilder
     {
-        $query=$model->newQuery();
+        $query=$model->newQuery()->orderBy('order','asc');
 
         if(request('subcategory_id')){
             $query->whereHas('subcategories',fn($q)=>$q->where('sub_category_id', request('subcategory_id')));
@@ -87,7 +87,7 @@ class BrendsDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Blfrtip')
-            ->orderBy([1, 'desc'])
+            // ->orderBy([1, 'desc'])
             ->parameters([
                 'pageLength' => 25, // 1 səhifədə 25 nəticə
                 'lengthMenu' => [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Hamısı"]],
@@ -97,13 +97,20 @@ class BrendsDataTable extends DataTable
                 'initComplete' => "function(settings, json) {
                     var table = this.api();
                     table.on('row-reorder', function (e, diff, edit) {
+
                         let data = [];
-                        for (let i = 0; i < diff.length; i++) {
+
+                        
+                    
+                   
+                        $(table.table().body()).find('tr').each(function (i, row) {
                             data.push({
-                                id: table.row(diff[i].node).id(),
-                                newPosition: diff[i].newData
+                                id: row.id,        
+                                position: i + 1     
                             });
-                        }
+                        });
+
+
                         if (data.length) {
                             $.ajax({
                                 url: '".route('admin.all.update-order')."',
@@ -121,6 +128,9 @@ class BrendsDataTable extends DataTable
                                         timer: 1500,
                                         showConfirmButton: false
                                     });
+
+                                        table.ajax.reload(null, false);
+
                                 },
                                 error: function (xhr) {
                                     Swal.fire({

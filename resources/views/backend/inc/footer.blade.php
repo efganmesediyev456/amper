@@ -57,4 +57,7 @@
 <script src="{{ asset('backend/datatable/responsive.bootstrap5.js') }}"></script>
 <script src="{{ asset('backend/datatable/dataTables.rowReorder.js') }}"></script>
 <script src="{{ asset('backend/datatable/dataTables.scroller.js') }}"></script>
+<script src="https://cdn.datatables.net/2.3.3/js/jquery.dataTables.min.js"></script>
+
 <script src="/backend/assets/js/custom.js"></script>
+

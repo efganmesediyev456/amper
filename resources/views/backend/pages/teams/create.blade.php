@@ -63,6 +63,11 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="Email">Email</label>
+                    <input type="text" name="Email" class="form-control" id="Email" placeholder="Email ünvanınızı daxil edin">
+                </div>
+
+                <div class="mb-3">
                     <label for="image">Şəkil</label>
                     <input type="file" name="image" class="form-control" id="image">
                     <small class="text-muted">Tövsiyə olunan ölçü: 280x308 piksel</small>

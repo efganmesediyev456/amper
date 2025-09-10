@@ -43,6 +43,7 @@ class BrendController extends Controller
             if ($request->hasFile('image')) {
                 $data['image'] = FileUploadHelper::uploadFile($request->file('image'), 'brends');
             }
+            $data['order']=Brend::max('order') + 1;
             $item = $this->mainService->save($item, $data);
              if ($request->has('subcategory_id')) {
                 $item->subcategories()->sync($request->subcategory_id);

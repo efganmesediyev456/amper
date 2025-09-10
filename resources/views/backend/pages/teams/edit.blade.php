@@ -64,6 +64,11 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="phone">Email</label>
+                    <input type="text" name="email" class="form-control" id="email" value="{{$item->email}}">
+                </div>
+
+                <div class="mb-3">
                     <label for="image">Şəkil</label>
                     <input type="file" name="image" class="form-control" id="image">
                     <small class="text-muted d-block my-2">Tövsiyə olunan ölçü: 280x308 piksel</small>
